@@ -1,0 +1,90 @@
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+service: recognition-workshop # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  cfLogs: true
+  environment:
+    SERVERLESS_STAGE: ${opt:stage, self:provider.stage}
+    SERVERLESS_PROJECT: ${self:service}
+    SERVERLESS_REGION: ${opt:region, self:provider.region}
+    TABLE_NAME: ${self:provider.environment.SERVERLESS_PROJECT}-${self:provider.environment.SERVERLESS_STAGE}
+    BUCKET_NAME:
+      Ref: ImagesBucket
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+      - s3:*
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - Ref: ImagesBucket
+            - '/*'
+    - Effect: Allow
+      Action:
+      - rekognition:DetectLabels
+      Resource: "*"
+
+package:
+  exclude:
+    - test/**
+    - .git/**
+
+functions:
+  get-labels:
+    handler: get-labels/index.handler
+    events:
+      - http:
+          path: labels/{filename}
+          method: get
+          cors: true
+    timeout: 60
+  get-signed-url:
+    handler: get-signed-url/index.handler
+    events:
+      - http:
+          path: signed-url
+          method: get
+          cors: true
+    timeout: 20
+
+
+plugins:
+  - serverless-mocha-plugin
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  serverless-mocha-plugin:
+    functionTemplate: templates/function.ejs
+  webpackIncludeModules: true
+
+resources:
+  Resources:
+    ImagesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+        CorsConfiguration:
+          CorsRules:
+          - AllowedHeaders:
+              - '*'
+            AllowedMethods:
+              - GET
+              - PUT
+            AllowedOrigins:
+              - '*'
+            ExposedHeaders:
+              - Date
+            Id: CorsRule1
+            MaxAge: '3600'
+      DeletionPolicy: Delete
+    SiteBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        AccessControl: PublicRead
+
+      DeletionPolicy: Delete

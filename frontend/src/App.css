@@ -1,0 +1,58 @@
+body {
+  color: #333;
+}
+
+.header, .content, form {
+  display: flex;
+  flex-direction: row;
+}
+
+form {
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 5px;
+}
+
+.header > div, .content > div {
+  width: 320px;
+  padding: 5px;
+  margin: 5px;
+  background: #EFEFEF;
+}
+
+.image {
+  background: #DCDCDC;
+  height: 200px;
+}
+
+.image, .imgPreview, .previewImage {
+  width: 320px;
+  height: 180px;
+}
+
+.previewImage {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.labels {
+
+}
+
+.labels .label {
+  background: white;
+  padding: 5px;
+  margin: 3px;
+}
+
+.fileInput {
+  width: 220px;
+}
+
+.status {
+  display: inline-block;
+}
