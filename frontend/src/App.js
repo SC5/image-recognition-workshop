@@ -111,12 +111,14 @@ class App extends Component {
         <div className="header">
           <div className="form">
             <form onSubmit={(e) => this._handleSubmit(e)}>
-              <input className="fileInput" type="file" onChange={(e) => this._handleImageChange(e)}/>
-              <button className="submitButton" type="submit" onClick={(e) => this._handleSubmit(e)}>Get labels
-              </button>
+              <input className="fileInput" name="file" id="file" type="file" onChange={(e) => this._handleImageChange(e)}/>
+              <label htmlFor="file">Choose an image</label>
+              <button className="submitButton" type="submit" onClick={(e) => this._handleSubmit(e)}>Get labels</button>
             </form>
           </div>
-          <div className="status">{status}</div>
+          <div className="status">
+            <span>{status}</span>
+          </div>
         </div>
         <div className="content">
           <div className="image">

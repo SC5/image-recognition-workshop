@@ -1,10 +1,20 @@
 body {
-  color: #333;
+  color: #555;
+}
+
+.container {
+  margin: 10px;
 }
 
 .header, .content, form {
   display: flex;
   flex-direction: row;
+}
+
+@media (max-width: 600px) {
+  .header, .content {
+    flex-direction: column;
+  }
 }
 
 form {
@@ -39,10 +49,6 @@ h1 {
   background-position: center;
 }
 
-.labels {
-
-}
-
 .labels .label {
   background: white;
   padding: 5px;
@@ -53,6 +59,41 @@ h1 {
   width: 220px;
 }
 
-.status {
+.status > span {
+  display: block;
+  padding: 8px;
+}
+
+.submitButton {
+  border: 0;
+  outline: none;
+}
+
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.fileInput + label, .submitButton {
+  padding: 8px;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: white;
+  background-color: #555;
   display: inline-block;
+}
+
+.fileInput:focus + label,
+.fileInput + label:hover,
+.submitButton:focus,
+.submitButton:hover {
+  background-color: #333;
+}
+
+.fileInput + label {
+  cursor: pointer;
 }
