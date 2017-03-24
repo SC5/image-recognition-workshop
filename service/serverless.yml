@@ -56,6 +56,7 @@ plugins:
   - serverless-mocha-plugin
   - serverless-webpack
   - serverless-offline
+  - deploy-frontend
 
 custom:
   serverless-mocha-plugin:
@@ -63,6 +64,18 @@ custom:
   webpackIncludeModules: true
 
 resources:
+  Outputs:
+    ImagesBucket:
+      Value:
+        Ref: ImagesBucket
+    SiteBucket:
+      Value:
+        Ref: SiteBucket
+    SiteURL:
+      Value:
+        Fn::GetAtt:
+          - SiteBucket
+          - WebsiteURL
   Resources:
     ImagesBucket:
       Type: AWS::S3::Bucket
@@ -85,6 +98,37 @@ resources:
     SiteBucket:
       Type: AWS::S3::Bucket
       Properties:
-        AccessControl: PublicRead
-
+        WebsiteConfiguration:
+          IndexDocument: index.html
+        AccessControl: Private
       DeletionPolicy: Delete
+    SiteBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: SiteBucket
+        PolicyDocument:
+          Version: '2008-10-17'
+          Statement:
+          - Sid: AllowPublicRead
+            Effect: Allow
+            Principal:
+              AWS: "*"
+            Action: s3:GetObject
+            Resource:
+              Fn::Join:
+              - ''
+              - - 'arn:aws:s3:::'
+                - Ref: SiteBucket
+                - "/*"
+          - Sid: AllowPublicList
+            Effect: Allow
+            Principal:
+              AWS: "*"
+            Action: s3:ListBucket
+            Resource:
+              Fn::Join:
+              - ''
+              - - 'arn:aws:s3:::'
+                - Ref: SiteBucket
+                - ''

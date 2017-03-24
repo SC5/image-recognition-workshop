@@ -16,7 +16,7 @@ class App extends Component {
 
   _handleSubmit(event) {
     event.preventDefault();
-    return this._getSignedUrl('d')
+    return this._getSignedUrl()
       .then((data) =>
         this._uploadFile(Object.assign({}, data, { file: this.state.file })))
       .then((filename) =>
@@ -34,14 +34,14 @@ class App extends Component {
       });
   }
 
-  _getSignedUrl(filename) {
-    const url = `${endpoint}/signed-url/${filename}`;
+  _getSignedUrl() {
+    const url = `${endpoint}/signed-url`;
     this.setState({
       status: 'Getting URL for upload...'
     });
     return fetch(url, { mode: 'cors' })
       .then(response => response.json())
-      .then(response => Object.assign(response, { originalFilename: filename }));
+      .then(response => Object.assign(response));
   }
 
   _uploadFile({ url, filename, file }){
