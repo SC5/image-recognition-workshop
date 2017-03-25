@@ -1,62 +1,79 @@
 body {
-  color: #555; }
+  color: #555;
+}
 
 .container {
-  margin: 10px; }
+  margin: 10px;
+}
 
 .header,
 .content,
 form {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+}
 
 @media (max-width: 600px) {
   .header,
   .content {
-    flex-direction: column; } }
+    flex-direction: column;
+  }
+}
 
 form {
-  justify-content: space-between; }
+  justify-content: space-between;
+}
 
 h1 {
   font-size: 20px;
-  margin: 5px; }
-
-.header > div,
-.content > div {
-  width: 320px;
-  padding: 5px;
   margin: 5px;
-  background: #EFEFEF; }
+}
+
+.header,
+.content {
+  > div {
+    width: 320px;
+    padding: 5px;
+    margin: 5px;
+    background: #EFEFEF;
+  }
+}
 
 .image {
   background: #DCDCDC;
-  height: 200px; }
+  height: 200px;
+}
 
 .image, .imgPreview, .previewImage {
   width: 320px;
-  height: 180px; }
+  height: 180px;
+}
 
 .previewImage {
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center; }
+  background-position: center;
+}
 
 .labels .label {
   background: white;
   padding: 5px;
-  margin: 3px; }
+  margin: 3px;
+}
 
 .fileInput {
-  width: 220px; }
+  width: 220px;
+}
 
 .status > span {
   display: block;
-  padding: 8px; }
+  padding: 8px;
+}
 
 .submitButton {
   border: 0;
-  outline: none; }
+  outline: none;
+}
 
 .fileInput {
   width: 0.1px;
@@ -64,7 +81,8 @@ h1 {
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  z-index: -1; }
+  z-index: -1;
+}
 
 .fileInput + label, .submitButton {
   padding: 8px;
@@ -72,13 +90,16 @@ h1 {
   font-weight: 700;
   color: white;
   background-color: #555;
-  display: inline-block; }
+  display: inline-block;
+}
 
 .fileInput:focus + label,
 .fileInput + label:hover,
 .submitButton:focus,
 .submitButton:hover {
-  background-color: #333; }
+  background-color: #333;
+}
 
 .fileInput + label {
-  cursor: pointer; }
+  cursor: pointer;
+}
