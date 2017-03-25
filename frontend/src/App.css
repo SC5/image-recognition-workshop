@@ -29,11 +29,11 @@ h1 {
   margin: 5px;
   background: #EFEFEF; }
 
-.image, .imgPreview, .previewImage {
+.image, .image-preview {
   width: 320px;
   height: 180px; }
 
-.previewImage {
+.image-preview {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center; }
@@ -44,19 +44,16 @@ h1 {
   margin: 3px;
   font-size: 0.8em; }
 
-.fileInput {
-  width: 220px; }
-
 .status > span {
   display: block;
   padding: 8px;
   font-size: 0.8em; }
 
-.submitButton {
+.submit-button {
   border: 0;
   outline: none; }
 
-.fileInput {
+.file-input {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
@@ -64,7 +61,7 @@ h1 {
   position: absolute;
   z-index: -1; }
 
-.fileInput + label, .submitButton {
+.file-input + label, .submit-button {
   text-transform: uppercase;
   padding: 8px;
   font-size: 0.7em;
@@ -73,11 +70,11 @@ h1 {
   background-color: #555;
   display: inline-block; }
 
-.fileInput:focus + label,
-.fileInput + label:hover,
-.submitButton:focus,
-.submitButton:hover {
+.file-input:focus + label,
+.file-input + label:hover,
+.submit-button:focus,
+.submit-button:hover {
   background-color: #333; }
 
-.fileInput + label {
+.file-input + label {
   cursor: pointer; }

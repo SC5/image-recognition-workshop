@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       file: '',
       imagePreviewUrl: '',
-      labels: [''],
+      labels: [],
       status: 'Select an image'
     };
   }
@@ -78,7 +78,7 @@ class App extends Component {
   _handleImageChange(e) {
     e.preventDefault();
     this.setState({
-      labels: ['']
+      labels: []
     });
     const reader = new FileReader();
     const file = e.target.files[0];
@@ -96,24 +96,21 @@ class App extends Component {
 
   render() {
     let { imagePreviewUrl, labels, status } = this.state;
-    let $imagePreview = null;
-    if (imagePreviewUrl) {
-      const divStyle = {
-        backgroundImage: 'url(' + imagePreviewUrl + ')'
-      }
-      $imagePreview = (<div className="previewImage" style={ divStyle }></div>);
-    } else {
-      $imagePreview = (<div></div>);
-    }
+    let $imageStyle = imagePreviewUrl ? {
+      backgroundImage: 'url(' + imagePreviewUrl + ')'
+    } : {
+      backgroundColor: 'transparent'
+    };
+
     return (
       <div className="container">
         <h1>Image Recognition Workshop</h1>
         <div className="header">
           <div className="form">
             <form onSubmit={(e) => this._handleSubmit(e)}>
-              <input className="fileInput" name="file" id="file" type="file" onChange={(e) => this._handleImageChange(e)}/>
+              <input className="file-input" name="file" id="file" type="file" onChange={(e) => this._handleImageChange(e)}/>
               <label htmlFor="file">Choose an image</label>
-              <button className="submitButton" type="submit" onClick={(e) => this._handleSubmit(e)}>Get labels</button>
+              <button className="submit-button" type="submit" onClick={(e) => this._handleSubmit(e)}>Get labels</button>
             </form>
           </div>
           <div className="status">
@@ -122,14 +119,12 @@ class App extends Component {
         </div>
         <div className="content">
           <div className="image">
-            <div className="imgPreview">
-              {$imagePreview}
-            </div>
+            <div className="image-preview" style={ $imageStyle } />
           </div>
           <div className="labels">
-            {labels.map((label, i) => {
-              return <div key={i} className="label">{label}</div>;
-            })}
+            {labels.map((label, i) =>
+              (<div key={i} className="label">{label}</div>)
+            )}
           </div>
         </div>
       </div>
