@@ -19,7 +19,7 @@ form {
   justify-content: space-between; }
 
 h1 {
-  font-size: 20px;
+  font-size: 1.2em;
   margin: 5px; }
 
 .header > div,
@@ -28,10 +28,6 @@ h1 {
   padding: 5px;
   margin: 5px;
   background: #EFEFEF; }
-
-.image {
-  background: #DCDCDC;
-  height: 200px; }
 
 .image, .imgPreview, .previewImage {
   width: 320px;
@@ -42,17 +38,19 @@ h1 {
   background-repeat: no-repeat;
   background-position: center; }
 
-.labels .label {
+.label {
   background: white;
   padding: 5px;
-  margin: 3px; }
+  margin: 3px;
+  font-size: 0.8em; }
 
 .fileInput {
   width: 220px; }
 
 .status > span {
   display: block;
-  padding: 8px; }
+  padding: 8px;
+  font-size: 0.8em; }
 
 .submitButton {
   border: 0;
@@ -67,8 +65,9 @@ h1 {
   z-index: -1; }
 
 .fileInput + label, .submitButton {
+  text-transform: uppercase;
   padding: 8px;
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-weight: 700;
   color: white;
   background-color: #555;

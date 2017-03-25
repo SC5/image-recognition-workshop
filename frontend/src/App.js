@@ -25,7 +25,7 @@ class App extends Component {
         const labels =
           response.Labels
             .map(({Confidence, Name}) =>
-              `${Name} (${Confidence})`);
+              `${Name} [${Confidence}]`);
 
         return this.setState({
           status: 'Select an image',
@@ -87,7 +87,7 @@ class App extends Component {
       this.setState({
         file,
         imagePreviewUrl: reader.result,
-        status: 'Press "Get labels" button'
+        status: 'Press "GET LABELS" button'
       });
     };
 
