@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
-
-cd service
-
-sls deploy --deploy-frontend
+./deploy-aws.sh
+./deploy-azure.sh

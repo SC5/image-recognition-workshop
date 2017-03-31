@@ -37,7 +37,7 @@ class App extends Component {
   _getSignedUrl() {
     const url = `${endpoint}/signed-url`;
     this.setState({
-      status: 'Getting URL for upload...'
+      status: 'Getting URL for upload...',
     });
     return fetch(url, { mode: 'cors' })
       .then(response => response.json())
@@ -48,7 +48,7 @@ class App extends Component {
     return new Promise((resolve) => {
       const reader = new FileReader();
       this.setState({
-        status: 'Uploading image...'
+        status: 'Uploading image...',
       });
       reader.onloadend = () =>
         fetch(url, {
@@ -67,7 +67,7 @@ class App extends Component {
   _getLabels(filename) {
     const url = `${endpoint}/labels/${filename}`;
     this.setState({
-      status: 'Getting labels...'
+      status: 'Getting labels...',
     });
     return fetch(url, {
       mode: 'cors',
@@ -78,7 +78,7 @@ class App extends Component {
   _handleImageChange(e) {
     e.preventDefault();
     this.setState({
-      labels: []
+      labels: [],
     });
     const reader = new FileReader();
     const file = e.target.files[0];
@@ -87,19 +87,19 @@ class App extends Component {
       this.setState({
         file,
         imagePreviewUrl: reader.result,
-        status: 'Press "GET LABELS" button'
+        status: 'Press "GET LABELS" button',
       });
     };
 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
   }
 
   render() {
-    let { imagePreviewUrl, labels, status } = this.state;
-    let $imageStyle = imagePreviewUrl ? {
-      backgroundImage: 'url(' + imagePreviewUrl + ')'
+    const { imagePreviewUrl, labels, status } = this.state;
+    const $imageStyle = imagePreviewUrl ? {
+      backgroundImage: `url(${imagePreviewUrl})`,
     } : {
-      backgroundColor: 'transparent'
+      backgroundColor: 'transparent',
     };
 
     return (
@@ -108,9 +108,13 @@ class App extends Component {
         <div className="header">
           <div className="form">
             <form onSubmit={(e) => this._handleSubmit(e)}>
-              <input className="file-input" name="file" id="file" type="file" onChange={(e) => this._handleImageChange(e)}/>
+              <input
+                className="file-input" name="file" id="file" type="file" onChange={(e) =>
+                  this._handleImageChange(e)} />
               <label htmlFor="file">Choose an image</label>
-              <button className="submit-button" type="submit" onClick={(e) => this._handleSubmit(e)}>Get labels</button>
+              <button
+                className="submit-button" type="submit" onClick={(e) =>
+                  this._handleSubmit(e)}>Get labels</button>
             </form>
           </div>
           <div className="status">
@@ -119,7 +123,7 @@ class App extends Component {
         </div>
         <div className="content">
           <div className="image">
-            <div className="image-preview" style={ $imageStyle } />
+            <div className="image-preview" style={$imageStyle} />
           </div>
           <div className="labels">
             {labels.map((label, i) =>

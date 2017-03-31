@@ -49,8 +49,11 @@ functions:
           path: signed-url
           method: get
           cors: true
+      - http:
+          path: signed-url/{filename}
+          method: get
+          cors: true
     timeout: 20
-
 
 plugins:
   - serverless-mocha-plugin
